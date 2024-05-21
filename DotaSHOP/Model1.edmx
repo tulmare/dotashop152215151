@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="transaction_id" Type="int" Nullable="false" />
+          <Property Name="skin_id" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="offer_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="favorites">
+          <Key>
+            <PropertyRef Name="favorite_id" />
+          </Key>
+          <Property Name="favorite_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="skin_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="offers">
+          <Key>
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="offer_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="reviews">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="int" Nullable="false" />
+          <Property Name="transaction_id" Type="int" Nullable="false" />
+          <Property Name="reviewer_id" Type="int" Nullable="false" />
+          <Property Name="rating" Type="int" Nullable="false" />
+          <Property Name="review_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="skins">
+          <Key>
+            <PropertyRef Name="skin_id" />
+          </Key>
+          <Property Name="skin_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="hero" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="rarity" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="slot" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="image_url" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statuses">
+          <Key>
+            <PropertyRef Name="status_id" />
+          </Key>
+          <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="transactions">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="transaction_id" Type="int" Nullable="false" />
+          <Property Name="buyer_id" Type="int" Nullable="false" />
+          <Property Name="seller_id" Type="int" Nullable="false" />
+          <Property Name="offer_id" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="created_at" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone_number" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_of_birth" Type="date" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="created_at" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_cart_offers">
+          <End Role="offers" Type="Self.offers" Multiplicity="1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offers">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="offer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_skins">
+          <End Role="skins" Type="Self.skins" Multiplicity="1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skins">
+              <PropertyRef Name="skin_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="skin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorites_skins">
+          <End Role="skins" Type="Self.skins" Multiplicity="1" />
+          <End Role="favorites" Type="Self.favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skins">
+              <PropertyRef Name="skin_id" />
+            </Principal>
+            <Dependent Role="favorites">
+              <PropertyRef Name="skin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorites_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="favorites" Type="Self.favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="favorites">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_offers_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="offers" Type="Self.offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="offers">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reviews_cart">
+          <End Role="cart" Type="Self.cart" Multiplicity="1" />
+          <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cart">
+              <PropertyRef Name="transaction_id" />
+            </Principal>
+            <Dependent Role="reviews">
+              <PropertyRef Name="transaction_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reviews_transactions">
+          <End Role="transactions" Type="Self.transactions" Multiplicity="1" />
+          <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transactions">
+              <PropertyRef Name="transaction_id" />
+            </Principal>
+            <Dependent Role="reviews">
+              <PropertyRef Name="transaction_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reviews_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reviews">
+              <PropertyRef Name="reviewer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statuses_offers">
+          <End Role="offers" Type="Self.offers" Multiplicity="1" />
+          <End Role="statuses" Type="Self.statuses" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="offers">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="statuses">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="favorites" EntityType="Self.favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="offers" EntityType="Self.offers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reviews" EntityType="Self.reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="skins" EntityType="Self.skins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statuses" EntityType="Self.statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transactions" EntityType="Self.transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cart_offers" Association="Self.FK_cart_offers">
+            <End Role="offers" EntitySet="offers" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_skins" Association="Self.FK_cart_skins">
+            <End Role="skins" EntitySet="skins" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorites_skins" Association="Self.FK_favorites_skins">
+            <End Role="skins" EntitySet="skins" />
+            <End Role="favorites" EntitySet="favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorites_users" Association="Self.FK_favorites_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="favorites" EntitySet="favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_offers_users" Association="Self.FK_offers_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="offers" EntitySet="offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reviews_cart" Association="Self.FK_reviews_cart">
+            <End Role="cart" EntitySet="cart" />
+            <End Role="reviews" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reviews_transactions" Association="Self.FK_reviews_transactions">
+            <End Role="transactions" EntitySet="transactions" />
+            <End Role="reviews" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reviews_users" Association="Self.FK_reviews_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="reviews" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statuses_offers" Association="Self.FK_statuses_offers">
+            <End Role="offers" EntitySet="offers" />
+            <End Role="statuses" EntitySet="statuses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="transaction_id" Type="Int32" Nullable="false" />
+          <Property Name="skin_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="offer_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="offers" Relationship="Self.FK_cart_offers" FromRole="cart" ToRole="offers" />
+          <NavigationProperty Name="skins" Relationship="Self.FK_cart_skins" FromRole="cart" ToRole="skins" />
+          <NavigationProperty Name="reviews" Relationship="Self.FK_reviews_cart" FromRole="cart" ToRole="reviews" />
+        </EntityType>
+        <EntityType Name="favorites">
+          <Key>
+            <PropertyRef Name="favorite_id" />
+          </Key>
+          <Property Name="favorite_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="skin_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="skins" Relationship="Self.FK_favorites_skins" FromRole="favorites" ToRole="skins" />
+          <NavigationProperty Name="users" Relationship="Self.FK_favorites_users" FromRole="favorites" ToRole="users" />
+        </EntityType>
+        <EntityType Name="offers">
+          <Key>
+            <PropertyRef Name="offer_id" />
+          </Key>
+          <Property Name="offer_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="cart" Relationship="Self.FK_cart_offers" FromRole="offers" ToRole="cart" />
+          <NavigationProperty Name="users" Relationship="Self.FK_offers_users" FromRole="offers" ToRole="users" />
+          <NavigationProperty Name="statuses" Relationship="Self.FK_statuses_offers" FromRole="offers" ToRole="statuses" />
+        </EntityType>
+        <EntityType Name="reviews">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="Int32" Nullable="false" />
+          <Property Name="transaction_id" Type="Int32" Nullable="false" />
+          <Property Name="reviewer_id" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="Int32" Nullable="false" />
+          <Property Name="review_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="cart" Relationship="Self.FK_reviews_cart" FromRole="reviews" ToRole="cart" />
+          <NavigationProperty Name="transactions" Relationship="Self.FK_reviews_transactions" FromRole="reviews" ToRole="transactions" />
+          <NavigationProperty Name="users" Relationship="Self.FK_reviews_users" FromRole="reviews" ToRole="users" />
+        </EntityType>
+        <EntityType Name="skins">
+          <Key>
+            <PropertyRef Name="skin_id" />
+          </Key>
+          <Property Name="skin_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hero" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rarity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="slot" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="image_url" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="cart" Relationship="Self.FK_cart_skins" FromRole="skins" ToRole="cart" />
+          <NavigationProperty Name="favorites" Relationship="Self.FK_favorites_skins" FromRole="skins" ToRole="favorites" />
+        </EntityType>
+        <EntityType Name="statuses">
+          <Key>
+            <PropertyRef Name="status_id" />
+          </Key>
+          <Property Name="status_id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="offers" Relationship="Self.FK_statuses_offers" FromRole="statuses" ToRole="offers" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="transactions">
+          <Key>
+            <PropertyRef Name="transaction_id" />
+          </Key>
+          <Property Name="transaction_id" Type="Int32" Nullable="false" />
+          <Property Name="buyer_id" Type="Int32" Nullable="false" />
+          <Property Name="seller_id" Type="Int32" Nullable="false" />
+          <Property Name="offer_id" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="reviews" Relationship="Self.FK_reviews_transactions" FromRole="transactions" ToRole="reviews" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="favorites" Relationship="Self.FK_favorites_users" FromRole="users" ToRole="favorites" />
+          <NavigationProperty Name="offers" Relationship="Self.FK_offers_users" FromRole="users" ToRole="offers" />
+          <NavigationProperty Name="reviews" Relationship="Self.FK_reviews_users" FromRole="users" ToRole="reviews" />
+        </EntityType>
+        <Association Name="FK_cart_offers">
+          <End Role="offers" Type="Self.offers" Multiplicity="1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="offers">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="offer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cart_skins">
+          <End Role="skins" Type="Self.skins" Multiplicity="1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skins">
+              <PropertyRef Name="skin_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="skin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reviews_cart">
+          <End Role="cart" Type="Self.cart" Multiplicity="1" />
+          <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cart">
+              <PropertyRef Name="transaction_id" />
+            </Principal>
+            <Dependent Role="reviews">
+              <PropertyRef Name="transaction_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorites_skins">
+          <End Role="skins" Type="Self.skins" Multiplicity="1" />
+          <End Role="favorites" Type="Self.favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="skins">
+              <PropertyRef Name="skin_id" />
+            </Principal>
+            <Dependent Role="favorites">
+              <PropertyRef Name="skin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_favorites_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="favorites" Type="Self.favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="favorites">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_offers_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="offers" Type="Self.offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="offers">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_statuses_offers">
+          <End Role="offers" Type="Self.offers" Multiplicity="1" />
+          <End Role="statuses" Type="Self.statuses" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="offers">
+              <PropertyRef Name="offer_id" />
+            </Principal>
+            <Dependent Role="statuses">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reviews_transactions">
+          <End Role="transactions" Type="Self.transactions" Multiplicity="1" />
+          <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transactions">
+              <PropertyRef Name="transaction_id" />
+            </Principal>
+            <Dependent Role="reviews">
+              <PropertyRef Name="transaction_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_reviews_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="reviews">
+              <PropertyRef Name="reviewer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cart" EntityType="Self.cart" />
+          <EntitySet Name="favorites" EntityType="Self.favorites" />
+          <EntitySet Name="offers" EntityType="Self.offers" />
+          <EntitySet Name="reviews" EntityType="Self.reviews" />
+          <EntitySet Name="skins" EntityType="Self.skins" />
+          <EntitySet Name="statuses" EntityType="Self.statuses" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="transactions" EntityType="Self.transactions" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK_cart_offers" Association="Self.FK_cart_offers">
+            <End Role="offers" EntitySet="offers" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cart_skins" Association="Self.FK_cart_skins">
+            <End Role="skins" EntitySet="skins" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reviews_cart" Association="Self.FK_reviews_cart">
+            <End Role="cart" EntitySet="cart" />
+            <End Role="reviews" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorites_skins" Association="Self.FK_favorites_skins">
+            <End Role="skins" EntitySet="skins" />
+            <End Role="favorites" EntitySet="favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_favorites_users" Association="Self.FK_favorites_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="favorites" EntitySet="favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_offers_users" Association="Self.FK_offers_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="offers" EntitySet="offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_statuses_offers" Association="Self.FK_statuses_offers">
+            <End Role="offers" EntitySet="offers" />
+            <End Role="statuses" EntitySet="statuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reviews_transactions" Association="Self.FK_reviews_transactions">
+            <End Role="transactions" EntitySet="transactions" />
+            <End Role="reviews" EntitySet="reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_reviews_users" Association="Self.FK_reviews_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="reviews" EntitySet="reviews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="cart">
+            <EntityTypeMapping TypeName="Model.cart">
+              <MappingFragment StoreEntitySet="cart">
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="skin_id" ColumnName="skin_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="offer_id" ColumnName="offer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="favorites">
+            <EntityTypeMapping TypeName="Model.favorites">
+              <MappingFragment StoreEntitySet="favorites">
+                <ScalarProperty Name="favorite_id" ColumnName="favorite_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="skin_id" ColumnName="skin_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="offers">
+            <EntityTypeMapping TypeName="Model.offers">
+              <MappingFragment StoreEntitySet="offers">
+                <ScalarProperty Name="offer_id" ColumnName="offer_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reviews">
+            <EntityTypeMapping TypeName="Model.reviews">
+              <MappingFragment StoreEntitySet="reviews">
+                <ScalarProperty Name="review_id" ColumnName="review_id" />
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="reviewer_id" ColumnName="reviewer_id" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="review_date" ColumnName="review_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="skins">
+            <EntityTypeMapping TypeName="Model.skins">
+              <MappingFragment StoreEntitySet="skins">
+                <ScalarProperty Name="skin_id" ColumnName="skin_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="hero" ColumnName="hero" />
+                <ScalarProperty Name="rarity" ColumnName="rarity" />
+                <ScalarProperty Name="slot" ColumnName="slot" />
+                <ScalarProperty Name="image_url" ColumnName="image_url" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statuses">
+            <EntityTypeMapping TypeName="Model.statuses">
+              <MappingFragment StoreEntitySet="statuses">
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transactions">
+            <EntityTypeMapping TypeName="Model.transactions">
+              <MappingFragment StoreEntitySet="transactions">
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
+                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
+                <ScalarProperty Name="offer_id" ColumnName="offer_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="Model.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
