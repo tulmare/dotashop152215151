@@ -26,5 +26,29 @@ namespace DotaSHOP
         {
             AppFrame.mainframe.Navigate(new Authorization());
         }
+
+        private void Regis_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                users person = new users()
+                {
+                    name = Name.Text,
+                    surname = Surname.Text,
+                    patronymic = Patronymic.Text,
+                    email = Email.Text,
+                    password = Password.Password,
+                    phone_number = Phone_number.Text,
+                    username = Username.Text,
+                    date_of_birth = DateTime.Parse(Date_of_birth.SelectedDate.ToString()),
+                };
+
+                AppConnect.model0db.users.Add(person);
+                AppConnect.model0db.SaveChanges();
+                MessageBox.Show("Вы успешно зарегистрировались");
+                AppFrame.mainframe.Navigate(new Authorization());
+            }
+            catch (Exception ex) { MessageBox.Show("Ошибка"); }
+        }
     }
 }

@@ -7,6 +7,61 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
     <Grid>
-        
+        <TextBox HorizontalAlignment="Center" FontSize="20px" Margin="0,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="29"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="43,31,0,0" Background="#FFDEE3EC" TextWrapping="Wrap" Text="DOTASHOP" VerticalAlignment="Top" Height="27" Width="102"/>
+        <ComboBox HorizontalAlignment="Left" Margin="686,34,0,0" VerticalAlignment="Top" Width="20"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="564,31,0,0" TextWrapping="Wrap" Text="Сортировка" VerticalAlignment="Top" Height="27" Width="117"/>
+        <Button HorizontalAlignment="Left" Margin="735,23,0,0" VerticalAlignment="Top" Height="41" Width="43">
+            <Button.Background>
+                <ImageBrush ImageSource="/carticon.jpg"/>
+            </Button.Background>
+        </Button>
+
+        <Image Grid.Column="0" Source="{Binding CarrectImage}" Margin="0,86,0,0"/>
+        <TextBlock Text="{Binding decription}" Margin="0,82,0,0">
+            <Run></Run>
+        </TextBlock>
+        <ListView x:Name="ListView1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,82,0,0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"></ColumnDefinition>
+                            <ColumnDefinition Width="300"></ColumnDefinition>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Width="140" Height="140" Source="{Binding CurrentPhoto}"/>
+                        <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="left">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                                <Run Text="Название: "/>
+                                <Run Text="{Binding name}"/>
+                            </TextBlock>
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                                <Run Text="Герой: "/>
+                                <Run Text="{Binding hero}"/>
+                            </TextBlock>
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                                <Run Text="Редкость: "/>
+                                <Run Text="{Binding rare}"/>
+                            </TextBlock>
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                                <Run Text="Слот: "/>
+                                <Run Text="{Binding slot}"/>
+                            </TextBlock>
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                                <Run Text="Цена: "/>
+                                <Run Text="{Binding price}"/>
+                            </TextBlock>
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                                <Run Text="Описание: "/>
+                                <Run Text="{Binding description}"/>
+                            </TextBlock>
+                        </StackPanel>
+                        <Button Grid.Column="2" FontSize="20px" Content="Купить" HorizontalAlignment="Left" Margin="85,31,0,0" VerticalAlignment="Top" Height="39" Width="105"/>
+                        <TextBox Grid.Column="2" Margin="85,75,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

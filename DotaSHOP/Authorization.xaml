@@ -18,6 +18,6 @@
         <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="246,236,0,0" TextWrapping="Wrap" Text="Пароль:" VerticalAlignment="Top" Foreground="Black"/>
         <Button x:Name="vhod" Content="Вход" HorizontalAlignment="Left" Background="White" Margin="246,336,0,0" VerticalAlignment="Top" Height="25" Width="140" Click="Button_Click_1"/>
         <Button x:Name="regis" Content="Регистрация" HorizontalAlignment="Left" Background="White" Margin="392,336,0,0" VerticalAlignment="Top" Height="25" Width="140" Click="Button_Click"/>
-        <Image x:Name="icon" HorizontalAlignment="Left" Height="50" Margin="246,38,0,0" VerticalAlignment="Top" Width="51" Source="/icon.com.png"/>
+        <Image x:Name="icon" HorizontalAlignment="Left" Height="50" Margin="246,38,0,0" VerticalAlignment="Top" Width="51" Source="img/logos/gameicon.png"/>
     </Grid>
 </Page>
