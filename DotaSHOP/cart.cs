@@ -14,20 +14,11 @@ namespace DotaSHOP
     
     public partial class cart
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cart()
-        {
-            this.reviews = new HashSet<reviews>();
-        }
-    
         public int transaction_id { get; set; }
         public int skin_id { get; set; }
-        public decimal price { get; set; }
-        public int offer_id { get; set; }
+        public int user_id { get; set; }
     
-        public virtual offers offers { get; set; }
         public virtual skins skins { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reviews> reviews { get; set; }
+        public virtual users users { get; set; }
     }
 }

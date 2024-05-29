@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DotaSHOP
 {
-    public static class AppConnect
+    internal class items
     {
-        public static Entities5 model0db;
+        public static Entities5 entity;
     }
 }

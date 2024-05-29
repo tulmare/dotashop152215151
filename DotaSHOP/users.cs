@@ -17,8 +17,8 @@ namespace DotaSHOP
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public users()
         {
+            this.cart = new HashSet<cart>();
             this.favorites = new HashSet<favorites>();
-            this.offers = new HashSet<offers>();
             this.reviews = new HashSet<reviews>();
         }
     
@@ -34,9 +34,9 @@ namespace DotaSHOP
         public System.DateTime created_at { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<favorites> favorites { get; set; }
+        public virtual ICollection<cart> cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<offers> offers { get; set; }
+        public virtual ICollection<favorites> favorites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reviews> reviews { get; set; }
     }

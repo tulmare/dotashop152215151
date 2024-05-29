@@ -22,7 +22,7 @@ namespace DotaSHOP
         }
     
         public int skin_id { get; set; }
-        public string name { get; set; }
+        public string skinname { get; set; }
         public string hero { get; set; }
         public string rarity { get; set; }
         public string slot { get; set; }

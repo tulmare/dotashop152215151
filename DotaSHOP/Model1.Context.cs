@@ -13,10 +13,10 @@ namespace DotaSHOP
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Entities5 : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Entities5()
+            : base("name=Entities5")
         {
         }
     
@@ -27,10 +27,8 @@ namespace DotaSHOP
     
         public virtual DbSet<cart> cart { get; set; }
         public virtual DbSet<favorites> favorites { get; set; }
-        public virtual DbSet<offers> offers { get; set; }
         public virtual DbSet<reviews> reviews { get; set; }
         public virtual DbSet<skins> skins { get; set; }
-        public virtual DbSet<statuses> statuses { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<transactions> transactions { get; set; }
         public virtual DbSet<users> users { get; set; }

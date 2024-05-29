@@ -35,6 +35,7 @@ namespace DotaSHOP
             var userObj = AppConnect.model0db.users.FirstOrDefault(x => x.email == Email.Text && x.password == Password.Password);
             if (userObj != null)
             {
+                App.Current.Properties["userEmail"] = userObj.user_id;
                 Window1 window = new Window1();
                 window.Show();
                 Application.Current.MainWindow.Close();
