@@ -1,36 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DotaSHOP
 {
-    /// <summary>
-    /// Логика взаимодействия для card.xaml
-    /// </summary>
     public partial class card : Window
     {
         public card()
         {
             InitializeComponent();
-            items.entity = new Entities5();
+            items.entity = new Entities6();
             ListCard.ItemsSource = AppConnect.model0db.cart.ToList();
         }
-
+        //Вернуться на главную
         private void back_Click(object sender, RoutedEventArgs e)
         {
             Window1 window = new Window1();
             window.Show();
             Close();
+        }
+
+        private void deleteItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var id = button.DataContext as cart;
+            var itemDel = AppConnect.model0db.cart.Where(x => x.transaction_id == id.transaction_id);
+            try
+            {
+                AppConnect.model0db.cart.RemoveRange(itemDel);
+                AppConnect.model0db.SaveChanges();
+                AppConnect.model0db.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
+                ListCard.ItemsSource = AppConnect.model0db.cart.ToList();
+                MessageBox.Show("Товар удалён");
+            }
+            catch
+            {
+                MessageBox.Show("Товар не удалён");
+            }
         }
     }
 }

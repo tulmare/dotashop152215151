@@ -20,7 +20,6 @@ namespace DotaSHOP
         public int rating { get; set; }
         public System.DateTime review_date { get; set; }
     
-        public virtual cart cart { get; set; }
         public virtual transactions transactions { get; set; }
         public virtual users users { get; set; }
     }

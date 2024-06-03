@@ -14,15 +14,12 @@ using System.Windows.Shapes;
 
 namespace DotaSHOP
 {
-    /// <summary>
-    /// Логика взаимодействия для Window1.xaml
-    /// </summary>
     public partial class Window1 : Window
     {
         public Window1()
         {
             InitializeComponent();
-            items.entity = new Entities5();
+            items.entity = new Entities6();
             ListView1.ItemsSource = FindMain();
         }
 
@@ -58,7 +55,7 @@ namespace DotaSHOP
         private void buy_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var id = button.Tag;
+            var id = button.DataContext as skins;
             int userId = (int)App.Current.Properties["userEmail"];
 
             try
@@ -66,10 +63,11 @@ namespace DotaSHOP
                 cart cart = new cart()
                 {
                     user_id = userId,
-                    skin_id = Convert.ToInt32(id),
+                    skin_id = id.skin_id,
                 };
-                AppConnect.model0db.cart.Add(cart);
-                MessageBox.Show("Товар отправлен в корзину + " + userId + " + " + Convert.ToInt32(id));
+                Entities6.GetContext().cart.Add(cart);
+                Entities6.GetContext().SaveChanges();
+                MessageBox.Show("Товар отправлен в корзину");
             }
             catch (Exception ex) { MessageBox.Show("Товар не отправлен в корзину"); }
         }

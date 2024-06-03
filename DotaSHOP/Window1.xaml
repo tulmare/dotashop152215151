@@ -34,7 +34,7 @@
                         <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="left">
                             <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
                                 <Run Text="Название: "/>
-                                <Run Text="{Binding name}"/>
+                                <Run Text="{Binding skinname}"/>
                             </TextBlock>
                             <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
                                 <Run Text="Герой: "/>

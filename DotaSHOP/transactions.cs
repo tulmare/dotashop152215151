@@ -21,8 +21,7 @@ namespace DotaSHOP
         }
     
         public int transaction_id { get; set; }
-        public int buyer_id { get; set; }
-        public int seller_id { get; set; }
+        public int user_id { get; set; }
         public int offer_id { get; set; }
         public decimal price { get; set; }
         public System.DateTime created_at { get; set; }

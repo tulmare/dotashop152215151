@@ -13,11 +13,21 @@ namespace DotaSHOP
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities5 : DbContext
+    public partial class Entities6 : DbContext
     {
-        public Entities5()
-            : base("name=Entities5")
+        public Entities6()
+            : base("name=Entities6")
         {
+        }
+        public static Entities6 _context;
+
+        public static Entities6 GetContext()
+        {
+            if (_context == null)
+            {
+                _context = new Entities6();
+            }
+            return _context;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

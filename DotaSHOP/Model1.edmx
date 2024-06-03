@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cart">
           <Key>
             <PropertyRef Name="transaction_id" />
           </Key>
-          <Property Name="transaction_id" Type="int" Nullable="false" />
+          <Property Name="transaction_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="skin_id" Type="int" Nullable="false" />
-          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="favorites">
           <Key>
@@ -40,6 +40,7 @@
           <Property Name="hero" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="rarity" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="slot" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="image_url" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
         </EntityType>
@@ -58,8 +59,7 @@
             <PropertyRef Name="transaction_id" />
           </Key>
           <Property Name="transaction_id" Type="int" Nullable="false" />
-          <Property Name="buyer_id" Type="int" Nullable="false" />
-          <Property Name="seller_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="offer_id" Type="int" Nullable="false" />
           <Property Name="price" Type="money" Nullable="false" />
           <Property Name="created_at" Type="date" Nullable="false" />
@@ -184,8 +184,7 @@
             <End Role="reviews" EntitySet="reviews" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -193,9 +192,9 @@
           <Key>
             <PropertyRef Name="transaction_id" />
           </Key>
-          <Property Name="transaction_id" Type="Int32" Nullable="false" />
+          <Property Name="transaction_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="skin_id" Type="Int32" Nullable="false" />
-          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="skins" Relationship="Self.FK_cart_skins" FromRole="cart" ToRole="skins" />
           <NavigationProperty Name="users" Relationship="Self.FK_cart_users" FromRole="cart" ToRole="users" />
         </EntityType>
@@ -234,6 +233,7 @@
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="cart" Relationship="Self.FK_cart_skins" FromRole="skins" ToRole="cart" />
           <NavigationProperty Name="favorites" Relationship="Self.FK_favorites_skins" FromRole="skins" ToRole="favorites" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -250,8 +250,7 @@
             <PropertyRef Name="transaction_id" />
           </Key>
           <Property Name="transaction_id" Type="Int32" Nullable="false" />
-          <Property Name="buyer_id" Type="Int32" Nullable="false" />
-          <Property Name="seller_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="offer_id" Type="Int32" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
@@ -347,7 +346,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities5" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities6" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="cart" EntityType="Self.cart" />
           <EntitySet Name="favorites" EntityType="Self.favorites" />
           <EntitySet Name="reviews" EntityType="Self.reviews" />
@@ -385,7 +384,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities5">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities6">
           <EntitySetMapping Name="cart">
             <EntityTypeMapping TypeName="Model.cart">
               <MappingFragment StoreEntitySet="cart">
@@ -418,6 +417,7 @@
           <EntitySetMapping Name="skins">
             <EntityTypeMapping TypeName="Model.skins">
               <MappingFragment StoreEntitySet="skins">
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="skin_id" ColumnName="skin_id" />
                 <ScalarProperty Name="skinname" ColumnName="skinname" />
                 <ScalarProperty Name="hero" ColumnName="hero" />
@@ -443,8 +443,7 @@
             <EntityTypeMapping TypeName="Model.transactions">
               <MappingFragment StoreEntitySet="transactions">
                 <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
-                <ScalarProperty Name="buyer_id" ColumnName="buyer_id" />
-                <ScalarProperty Name="seller_id" ColumnName="seller_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="offer_id" ColumnName="offer_id" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />

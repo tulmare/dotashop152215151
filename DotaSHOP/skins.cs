@@ -28,6 +28,7 @@ namespace DotaSHOP
         public string slot { get; set; }
         public string image_url { get; set; }
         public string description { get; set; }
+        public Nullable<decimal> price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> cart { get; set; }
