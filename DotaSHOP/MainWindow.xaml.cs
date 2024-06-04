@@ -22,7 +22,7 @@ namespace DotaSHOP
             InitializeComponent();
             AppFrame.mainframe = FrameMain;
             AppFrame.mainframe.Navigate(new Authorization());
-            AppConnect.model0db = new Entities6();
+            AppConnect.model0db = new Entities8();
         }
     }
 }

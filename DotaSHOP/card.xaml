@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="card" Height="450" Width="800">
     <Grid>
-        <Button x:Name="back" Content="Назад" HorizontalAlignment="Left" Margin="39,9,0,0" FontSize="20px" VerticalAlignment="Top" Width="83" Height="31" Click="back_Click"/>
-        <TextBlock x:Name="Prise" HorizontalAlignment="Left" Margin="39,366,0,0" TextWrapping="Wrap" Text="Цена: " FontSize="20px" VerticalAlignment="Top"/>
+        <Button x:Name="back" Content="Назад" HorizontalAlignment="Left" Margin="39,10,0,0" FontSize="20px" VerticalAlignment="Top" Width="83" Height="31" Click="back_Click"/>
+        <TextBlock x:Name="Prise" HorizontalAlignment="Left" Margin="39,378,0,0" TextWrapping="Wrap" Text="Цена: " FontSize="20px" VerticalAlignment="Top"/>
 
         <ListView x:Name="ListCard" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,60,0,66">
             <ListView.ItemTemplate>
@@ -53,6 +53,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button x:Name="buy" Content="Заказать" HorizontalAlignment="Left" Margin="642,368,0,0" FontSize="20px" VerticalAlignment="Top" Height="32" Width="107"/>
+        <Button x:Name="buy" Content="Заказать" HorizontalAlignment="Left" Margin="642,375,0,0" FontSize="20px" VerticalAlignment="Top" Height="32" Width="107"/>
     </Grid>
 </Window>

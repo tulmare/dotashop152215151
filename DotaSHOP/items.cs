@@ -8,6 +8,6 @@ namespace DotaSHOP
 {
     internal class items
     {
-        public static Entities6 entity;
+        public static Entities8 entity;
     }
 }

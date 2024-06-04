@@ -13,6 +13,13 @@
           <Property Name="skin_id" Type="int" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="categorID" />
+          </Key>
+          <Property Name="categorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rarity" Type="nchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="favorites">
           <Key>
             <PropertyRef Name="favorite_id" />
@@ -31,11 +38,18 @@
           <Property Name="rating" Type="int" Nullable="false" />
           <Property Name="review_date" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="skins">
           <Key>
             <PropertyRef Name="skin_id" />
           </Key>
-          <Property Name="skin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="skin_id" Type="int" Nullable="false" />
           <Property Name="skinname" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="hero" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="rarity" Type="nvarchar" MaxLength="255" Nullable="false" />
@@ -43,6 +57,7 @@
           <Property Name="price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="image_url" Type="nvarchar(max)" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
+          <Property Name="categorID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -68,7 +83,7 @@
           <Key>
             <PropertyRef Name="user_id" />
           </Key>
-          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="surname" Type="nvarchar(max)" Nullable="false" />
           <Property Name="patronymic" Type="nvarchar(max)" Nullable="false" />
@@ -78,6 +93,7 @@
           <Property Name="username" Type="nvarchar(max)" Nullable="false" />
           <Property Name="password" Type="nvarchar(max)" Nullable="false" />
           <Property Name="created_at" Type="date" Nullable="false" />
+          <Property Name="roleID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_cart_skins">
           <End Role="skins" Type="Self.skins" Multiplicity="1" />
@@ -151,10 +167,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_skins_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="skins" Type="Self.skins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="categorID" />
+            </Principal>
+            <Dependent Role="skins">
+              <PropertyRef Name="categorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="favorites" EntityType="Self.favorites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reviews" EntityType="Self.reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="skins" EntityType="Self.skins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="transactions" EntityType="Self.transactions" Schema="dbo" store:Type="Tables" />
@@ -183,6 +225,14 @@
             <End Role="users" EntitySet="users" />
             <End Role="reviews" EntitySet="reviews" />
           </AssociationSet>
+          <AssociationSet Name="FK_skins_categories" Association="Self.FK_skins_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="skins" EntitySet="skins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_role" Association="Self.FK_users_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -197,6 +247,14 @@
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="skins" Relationship="Self.FK_cart_skins" FromRole="cart" ToRole="skins" />
           <NavigationProperty Name="users" Relationship="Self.FK_cart_users" FromRole="cart" ToRole="users" />
+        </EntityType>
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="categorID" />
+          </Key>
+          <Property Name="categorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rarity" Type="String" MaxLength="255" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="skins" Relationship="Self.FK_skins_categories" FromRole="categories" ToRole="skins" />
         </EntityType>
         <EntityType Name="favorites">
           <Key>
@@ -220,20 +278,30 @@
           <NavigationProperty Name="transactions" Relationship="Self.FK_reviews_transactions" FromRole="reviews" ToRole="transactions" />
           <NavigationProperty Name="users" Relationship="Self.FK_reviews_users" FromRole="reviews" ToRole="users" />
         </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_users_role" FromRole="role" ToRole="users" />
+        </EntityType>
         <EntityType Name="skins">
           <Key>
             <PropertyRef Name="skin_id" />
           </Key>
-          <Property Name="skin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="skin_id" Type="Int32" Nullable="false" />
           <Property Name="skinname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="hero" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="rarity" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="slot" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="image_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categorID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="cart" Relationship="Self.FK_cart_skins" FromRole="skins" ToRole="cart" />
+          <NavigationProperty Name="categories" Relationship="Self.FK_skins_categories" FromRole="skins" ToRole="categories" />
           <NavigationProperty Name="favorites" Relationship="Self.FK_favorites_skins" FromRole="skins" ToRole="favorites" />
-          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -260,7 +328,7 @@
           <Key>
             <PropertyRef Name="user_id" />
           </Key>
-          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -270,9 +338,11 @@
           <Property Name="username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="roleID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="cart" Relationship="Self.FK_cart_users" FromRole="users" ToRole="cart" />
           <NavigationProperty Name="favorites" Relationship="Self.FK_favorites_users" FromRole="users" ToRole="favorites" />
           <NavigationProperty Name="reviews" Relationship="Self.FK_reviews_users" FromRole="users" ToRole="reviews" />
+          <NavigationProperty Name="role" Relationship="Self.FK_users_role" FromRole="users" ToRole="role" />
         </EntityType>
         <Association Name="FK_cart_skins">
           <End Role="skins" Type="Self.skins" Multiplicity="1" />
@@ -295,6 +365,18 @@
             </Principal>
             <Dependent Role="cart">
               <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_skins_categories">
+          <End Role="categories" Type="Self.categories" Multiplicity="1" />
+          <End Role="skins" Type="Self.skins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="categorID" />
+            </Principal>
+            <Dependent Role="skins">
+              <PropertyRef Name="categorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -346,10 +428,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities6" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_users_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities8" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="cart" EntityType="Self.cart" />
+          <EntitySet Name="categories" EntityType="Self.categories" />
           <EntitySet Name="favorites" EntityType="Self.favorites" />
           <EntitySet Name="reviews" EntityType="Self.reviews" />
+          <EntitySet Name="role" EntityType="Self.role" />
           <EntitySet Name="skins" EntityType="Self.skins" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="transactions" EntityType="Self.transactions" />
@@ -361,6 +457,10 @@
           <AssociationSet Name="FK_cart_users" Association="Self.FK_cart_users">
             <End Role="users" EntitySet="users" />
             <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_skins_categories" Association="Self.FK_skins_categories">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="skins" EntitySet="skins" />
           </AssociationSet>
           <AssociationSet Name="FK_favorites_skins" Association="Self.FK_favorites_skins">
             <End Role="skins" EntitySet="skins" />
@@ -378,19 +478,31 @@
             <End Role="users" EntitySet="users" />
             <End Role="reviews" EntitySet="reviews" />
           </AssociationSet>
+          <AssociationSet Name="FK_users_role" Association="Self.FK_users_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities6">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities8">
           <EntitySetMapping Name="cart">
             <EntityTypeMapping TypeName="Model.cart">
               <MappingFragment StoreEntitySet="cart">
                 <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
                 <ScalarProperty Name="skin_id" ColumnName="skin_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="Model.categories">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="categorID" ColumnName="categorID" />
+                <ScalarProperty Name="rarity" ColumnName="rarity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -414,17 +526,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="Model.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="role1" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="skins">
             <EntityTypeMapping TypeName="Model.skins">
               <MappingFragment StoreEntitySet="skins">
-                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="skin_id" ColumnName="skin_id" />
                 <ScalarProperty Name="skinname" ColumnName="skinname" />
                 <ScalarProperty Name="hero" ColumnName="hero" />
                 <ScalarProperty Name="rarity" ColumnName="rarity" />
                 <ScalarProperty Name="slot" ColumnName="slot" />
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="image_url" ColumnName="image_url" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="categorID" ColumnName="categorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -463,6 +584,7 @@
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

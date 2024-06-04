@@ -1,27 +1,33 @@
-﻿<Window x:Class="DotaSHOP.Window1"
+﻿<Window x:Class="DotaSHOP.Adminka"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DotaSHOP"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Adminka" Height="450" Width="800">
     <Grid>
         <TextBox x:Name="findSkins" HorizontalAlignment="Center" FontSize="20px" Margin="0,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="29"/>
         <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="43,31,0,0" Background="#FFDEE3EC" TextWrapping="Wrap" Text="DOTASHOP" VerticalAlignment="Top" Height="27" Width="102"/>
-        <ComboBox x:Name="sortItems" HorizontalAlignment="Left" Margin="551,34,0,0" VerticalAlignment="Top" Width="121" SelectionChanged="sortItems_SelectionChanged" >
+        <ComboBox x:Name="sortItems" HorizontalAlignment="Left" Margin="661,36,0,0" VerticalAlignment="Top" Width="20" SelectionChanged="sortItems_SelectionChanged" >
+            <ComboBoxItem Content="Arcana" />
+            <ComboBoxItem Content="Immortal" />
+            <ComboBoxItem Content="Legendary" />
+            <ComboBoxItem Content="Mythical" />
+            <ComboBoxItem Content="Rare" />
+            <ComboBoxItem Content="Uncommon" />
+            <ComboBoxItem Content="Common" />
         </ComboBox>
-        <Button x:Name="card" HorizontalAlignment="Left" Margin="735,23,0,0" VerticalAlignment="Top" Height="41" Width="43" Click="card_Click">
-            <Button.Background>
-                <ImageBrush ImageSource="img/logos/carticon.jpg"/>
-            </Button.Background>
-        </Button>
+
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="564,31,0,0" TextWrapping="Wrap" Text="Фильтры" VerticalAlignment="Top" Height="27" Width="81"/>
+        <Button x:Name="AddItem" Content="Добавить" HorizontalAlignment="Left" Margin="698,24,0,0" VerticalAlignment="Top" Height="41" Width="68" Click="AddItem_Click" />
+
 
         <Image Grid.Column="0" Source="{Binding CarrectImage}" Margin="0,86,0,0"/>
         <TextBlock Text="{Binding decription}" Margin="0,82,0,0">
             <Run></Run>
         </TextBlock>
-        <ListView x:Name="ListView1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,82,0,0">
+        <ListView x:Name="ListView2" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,82,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -57,7 +63,8 @@
                                 <Run Text="{Binding description}"/>
                             </TextBlock>
                         </StackPanel>
-                        <Button x:Name="buy" Grid.Column="2" FontSize="20px" Content="Купить" HorizontalAlignment="Left" Margin="85,0,0,0" Tag="{Binding id}" VerticalAlignment="Center" Height="40" Width="105" Click="buy_Click"/>
+                        <Button x:Name="Change" Grid.Column="2" FontSize="20px" Content="Изменить" HorizontalAlignment="Left" Margin="85,20,0,0" Tag="{Binding id}" VerticalAlignment="Top" Height="39" Width="105" Click="Change_Click"/>
+                        <Button x:Name="Delete" Grid.Column="2" FontSize="20px" Content="Удалить" HorizontalAlignment="Left" Margin="85,70,0,0" Tag="{Binding id}" VerticalAlignment="Top" Height="39" Width="105" Click="Delete_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -32,6 +32,7 @@ namespace DotaSHOP
         public string username { get; set; }
         public string password { get; set; }
         public System.DateTime created_at { get; set; }
+        public int roleID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cart> cart { get; set; }
@@ -39,5 +40,6 @@ namespace DotaSHOP
         public virtual ICollection<favorites> favorites { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reviews> reviews { get; set; }
+        public virtual role role { get; set; }
     }
 }

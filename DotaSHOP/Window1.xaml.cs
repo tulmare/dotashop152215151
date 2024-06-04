@@ -16,16 +16,24 @@ namespace DotaSHOP
 {
     public partial class Window1 : Window
     {
-        public Window1()
+        int userID = 1;
+        public Window1(int userid)
         {
             InitializeComponent();
-            items.entity = new Entities6();
+            items.entity = new Entities8();
             ListView1.ItemsSource = FindMain();
+            userID = userid;
+            sortItems.Items.Add("Фильтрация");
+            foreach (var item in AppConnect.model0db.categories.ToList()) 
+            {
+                sortItems.Items.Add(item.rarity.ToString());
+            }
+            sortItems.SelectedIndex = 0;
         }
 
         private void card_Click(object sender, RoutedEventArgs e)
         {
-            card card = new card();
+            card card = new card(userID);
             card.Show();
             Close();
         }
@@ -41,13 +49,18 @@ namespace DotaSHOP
             }
             else
             {
-                mains = mains.Where(x => x.skinname.ToLower().Contains(findSkins.Text.ToLower())).ToList();
+                mains = mains.Where(x => x.rarity.ToLower().Contains(findSkins.Text.ToLower())).ToList();
+            }
+
+            if (sortItems.SelectedIndex != 0)
+            {
+                mains = mains.Where(x => x.categorID.ToString() == sortItems.SelectedIndex.ToString()).ToList();
             }
 
             var mainAll = mains;
             return mains.ToArray();
         }
-        private void findItems_TextChanged(object sender, TextChangedEventArgs e)
+        private void findSkins_TextChanged(object sender, TextChangedEventArgs e)
         {
             ListView1.ItemsSource = FindMain();
         }
@@ -65,8 +78,8 @@ namespace DotaSHOP
                     user_id = userId,
                     skin_id = id.skin_id,
                 };
-                Entities6.GetContext().cart.Add(cart);
-                Entities6.GetContext().SaveChanges();
+                Entities8.GetContext().cart.Add(cart);
+                Entities8.GetContext().SaveChanges();
                 MessageBox.Show("Товар отправлен в корзину");
             }
             catch (Exception ex) { MessageBox.Show("Товар не отправлен в корзину"); }

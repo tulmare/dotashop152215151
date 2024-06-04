@@ -6,16 +6,17 @@ namespace DotaSHOP
 {
     public partial class card : Window
     {
-        public card()
+        int userID = 1;
+        public card(int userid)
         {
             InitializeComponent();
-            items.entity = new Entities6();
+            items.entity = new Entities8();
             ListCard.ItemsSource = AppConnect.model0db.cart.ToList();
         }
         //Вернуться на главную
         private void back_Click(object sender, RoutedEventArgs e)
         {
-            Window1 window = new Window1();
+            Window1 window = new Window1(userID);
             window.Show();
             Close();
         }
