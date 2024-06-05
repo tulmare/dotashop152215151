@@ -13,19 +13,18 @@ namespace DotaSHOP
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities8 : DbContext
+    public partial class Entities9 : DbContext
     {
-        public Entities8()
-            : base("name=Entities8")
+        public Entities9()
+            : base("name=Entities9")
         {
         }
-        public static Entities8 _context;
-
-        public static Entities8 GetContext()
+        public static Entities9 _context;
+        public static Entities9 GetContext()
         {
-            if ( _context == null )
+            if (_context == null)
             {
-                _context = new Entities8();
+                _context = new Entities9();
             }
             return _context;
         }
@@ -36,11 +35,12 @@ namespace DotaSHOP
         }
     
         public virtual DbSet<cart> cart { get; set; }
-        public virtual DbSet<categories> categories { get; set; }
         public virtual DbSet<favorites> favorites { get; set; }
+        public virtual DbSet<rarcategory> rarcategory { get; set; }
         public virtual DbSet<reviews> reviews { get; set; }
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<skins> skins { get; set; }
+        public virtual DbSet<slotcategory> slotcategory { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<transactions> transactions { get; set; }
         public virtual DbSet<users> users { get; set; }

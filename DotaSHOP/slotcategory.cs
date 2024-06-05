@@ -12,16 +12,16 @@ namespace DotaSHOP
     using System;
     using System.Collections.Generic;
     
-    public partial class categories
+    public partial class slotcategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public categories()
+        public slotcategory()
         {
             this.skins = new HashSet<skins>();
         }
     
-        public int categorID { get; set; }
-        public string rarity { get; set; }
+        public int slotID { get; set; }
+        public string slot { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<skins> skins { get; set; }

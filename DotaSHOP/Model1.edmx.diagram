@@ -4,24 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0692f5bd4bb14126a10c507f18f914b2" Name="Diagram1">
+      <Diagram DiagramId="865018f2cd8e4ab7823cea63a955996d" Name="Diagram1">
         <EntityTypeShape EntityType="Model.cart" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.categories" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.favorites" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.rarcategory" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.reviews" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.role" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.skins" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.skins" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.slotcategory" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.transactions" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.transactions" Width="1.5" PointX="5.125" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.users" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_cart_skins" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_cart_users" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.FK_skins_categories" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_favorites_skins" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_favorites_users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_skins_rarcategory" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_reviews_transactions" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_reviews_users" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK_users_role" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_skins_slotcategory" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

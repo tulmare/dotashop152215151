@@ -8,25 +8,25 @@
       d:DesignHeight="600"
       Title="Registration" Width="821">
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Center" FontSize="30px" Margin="0,43,0,0" TextWrapping="Wrap" Text="DOTASHOP" VerticalAlignment="Top" Foreground="Black"/>
-        <TextBlock HorizontalAlignment="Center" FontSize="20px" TextWrapping="Wrap" Text="Регистрация" VerticalAlignment="Top" Foreground="Black" Margin="0,88,0,0"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,147,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="Black"/>
+    <Grid Background="#FF212121">
+        <TextBlock HorizontalAlignment="Center" FontSize="30px" Margin="0,43,0,0" TextWrapping="Wrap" Text="DOTASHOP" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+        <TextBlock HorizontalAlignment="Center" FontSize="20px" TextWrapping="Wrap" Text="Регистрация" VerticalAlignment="Top" Foreground="#FFFFFF" Margin="0,88,0,0"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,147,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="#FFFFFF"/>
         <TextBox x:Name="Email" HorizontalAlignment="Left" Margin="58,179,0,0" FontSize="23px" TextWrapping="Wrap" VerticalAlignment="Top" Width="291" Height="35"/>
         <PasswordBox Name="Password" HorizontalAlignment="Left" Margin="58,265,0,0" FontSize="23px" VerticalAlignment="Top" Width="291" Height="35"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,231,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Foreground="Black"/>
-        <Button x:Name="Otmena" Content="Отмена" HorizontalAlignment="Left" Background="White" Margin="248,518,0,0" VerticalAlignment="Top" Height="25" Width="127" Click="Otmena_Click"/>
-        <Button x:Name="Regis" Content="Зарегистрироваться" HorizontalAlignment="Left" Background="White" Margin="446,518,0,0" VerticalAlignment="Top" Height="25" Width="144" Click="Regis_Click"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,231,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+        <Button x:Name="Otmena" Content="Отмена" HorizontalAlignment="Left" Background="#FF3A3A3A" Foreground="#FFFFFF" Margin="248,518,0,0" VerticalAlignment="Top" Height="25" Width="127" Click="Otmena_Click"/>
+        <Button x:Name="Regis" Content="Зарегистрироваться" HorizontalAlignment="Left" Background="#FF3A3A3A" Foreground="#FFFFFF" Margin="446,518,0,0" VerticalAlignment="Top" Height="25" Width="144" Click="Regis_Click"/>
         <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="445,179,0,0" FontSize="23px" TextWrapping="Wrap" VerticalAlignment="Top" Width="291" Height="35"/>
         <TextBox x:Name="Surname" HorizontalAlignment="Left" Margin="445,265,0,0" FontSize="23px" TextWrapping="Wrap" VerticalAlignment="Top" Width="291" Height="35"/>
         <TextBox x:Name="Phone_number" HorizontalAlignment="Left" Margin="58,346,0,0" FontSize="23px" TextWrapping="Wrap" VerticalAlignment="Top" Width="291" Height="35"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,314,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top" Foreground="Black"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,314,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top" Foreground="#FFFFFF"/>
         <TextBox x:Name="Patronymic" HorizontalAlignment="Left" Margin="446,346,0,0" FontSize="23px" TextWrapping="Wrap" VerticalAlignment="Top" Width="291" Height="35"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="445,147,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top" Foreground="Black"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="445,231,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top" Foreground="Black"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="446,314,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top" Foreground="Black"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="445,393,0,0" TextWrapping="Wrap" Text="Дата рождения" VerticalAlignment="Top" Foreground="Black"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,393,0,0" TextWrapping="Wrap" Text="Имя пользователя" VerticalAlignment="Top" Foreground="Black"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="445,147,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="445,231,0,0" TextWrapping="Wrap" Text="Фамилия" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="446,314,0,0" TextWrapping="Wrap" Text="Отчество" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="445,393,0,0" TextWrapping="Wrap" Text="Дата рождения" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="58,393,0,0" TextWrapping="Wrap" Text="Имя пользователя" VerticalAlignment="Top" Foreground="#FFFFFF"/>
         <TextBox x:Name="Username" HorizontalAlignment="Left" Margin="58,425,0,0" FontSize="23px" TextWrapping="Wrap" VerticalAlignment="Top" Width="291" Height="35"/>
         <DatePicker x:Name="Date_of_birth" HorizontalAlignment="Left" Margin="446,425,0,0" VerticalAlignment="Top" Height="35" Width="291"/>
         <Image x:Name="icon" HorizontalAlignment="Left" Height="50" Margin="261,38,0,0" VerticalAlignment="Top" Width="51" Source="img/logos/gameicon.png"/>

@@ -6,28 +6,19 @@
         xmlns:local="clr-namespace:DotaSHOP"
         mc:Ignorable="d"
         Title="Adminka" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#FF212121">
         <TextBox x:Name="findSkins" HorizontalAlignment="Center" FontSize="20px" Margin="0,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Height="29"/>
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="43,31,0,0" Background="#FFDEE3EC" TextWrapping="Wrap" Text="DOTASHOP" VerticalAlignment="Top" Height="27" Width="102"/>
-        <ComboBox x:Name="sortItems" HorizontalAlignment="Left" Margin="661,36,0,0" VerticalAlignment="Top" Width="20" SelectionChanged="sortItems_SelectionChanged" >
-            <ComboBoxItem Content="Arcana" />
-            <ComboBoxItem Content="Immortal" />
-            <ComboBoxItem Content="Legendary" />
-            <ComboBoxItem Content="Mythical" />
-            <ComboBoxItem Content="Rare" />
-            <ComboBoxItem Content="Uncommon" />
-            <ComboBoxItem Content="Common" />
-        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="43,31,0,0" Background="#FF212121" Foreground="#FFFFFF" TextWrapping="Wrap" Text="DOTASHOP" VerticalAlignment="Top" Height="27" Width="102"/>
+        <ComboBox x:Name="sortItems" HorizontalAlignment="Left" Margin="551,34,0,0" VerticalAlignment="Top" Width="121" SelectionChanged="sortItems_SelectionChanged"/>
 
-        <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="564,31,0,0" TextWrapping="Wrap" Text="Фильтры" VerticalAlignment="Top" Height="27" Width="81"/>
-        <Button x:Name="AddItem" Content="Добавить" HorizontalAlignment="Left" Margin="698,24,0,0" VerticalAlignment="Top" Height="41" Width="68" Click="AddItem_Click" />
+        <Button x:Name="AddItem" Content="Добавить" HorizontalAlignment="Left" Margin="698,24,0,0" VerticalAlignment="Top" Height="41" Width="68" Click="AddItem_Click" Background="#FF3A3A3A" Foreground="#FFFFFF"/>
 
 
         <Image Grid.Column="0" Source="{Binding CarrectImage}" Margin="0,86,0,0"/>
         <TextBlock Text="{Binding decription}" Margin="0,82,0,0">
             <Run></Run>
         </TextBlock>
-        <ListView x:Name="ListView2" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,82,0,0">
+        <ListView x:Name="ListView1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,82,0,0" Background="#FF212121">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -38,33 +29,33 @@
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Width="140" Height="140" Source="{Binding CurrentPhoto}"/>
                         <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="left">
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
                                 <Run Text="Название: "/>
                                 <Run Text="{Binding skinname}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
                                 <Run Text="Герой: "/>
                                 <Run Text="{Binding hero}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
                                 <Run Text="Редкость: "/>
                                 <Run Text="{Binding rarity}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
                                 <Run Text="Слот: "/>
                                 <Run Text="{Binding slot}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
                                 <Run Text="Цена: "/>
                                 <Run Text="{Binding price}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
                                 <Run Text="Описание: "/>
                                 <Run Text="{Binding description}"/>
                             </TextBlock>
                         </StackPanel>
-                        <Button x:Name="Change" Grid.Column="2" FontSize="20px" Content="Изменить" HorizontalAlignment="Left" Margin="85,20,0,0" Tag="{Binding id}" VerticalAlignment="Top" Height="39" Width="105" Click="Change_Click"/>
-                        <Button x:Name="Delete" Grid.Column="2" FontSize="20px" Content="Удалить" HorizontalAlignment="Left" Margin="85,70,0,0" Tag="{Binding id}" VerticalAlignment="Top" Height="39" Width="105" Click="Delete_Click"/>
+                        <Button x:Name="Change" Grid.Column="2" FontSize="20px" Content="Изменить" HorizontalAlignment="Left" Margin="85,20,0,0" Tag="{Binding id}" VerticalAlignment="Top" Height="39" Width="105" Click="Change_Click" Background="#FF3A3A3A" Foreground="#FFFFFF"/>
+                        <Button x:Name="Delete" Grid.Column="2" FontSize="20px" Content="Удалить" HorizontalAlignment="Left" Margin="85,70,0,0" Tag="{Binding id}" VerticalAlignment="Top" Height="39" Width="105" Click="Delete_Click" Background="#FF3A3A3A" Foreground="#FFFFFF"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

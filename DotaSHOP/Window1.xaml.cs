@@ -20,11 +20,11 @@ namespace DotaSHOP
         public Window1(int userid)
         {
             InitializeComponent();
-            items.entity = new Entities8();
+            items.entity = new Entities9();
             ListView1.ItemsSource = FindMain();
             userID = userid;
             sortItems.Items.Add("Фильтрация");
-            foreach (var item in AppConnect.model0db.categories.ToList()) 
+            foreach (var item in AppConnect.model0db.rarcategory.ToList()) 
             {
                 sortItems.Items.Add(item.rarity.ToString());
             }
@@ -49,12 +49,12 @@ namespace DotaSHOP
             }
             else
             {
-                mains = mains.Where(x => x.rarity.ToLower().Contains(findSkins.Text.ToLower())).ToList();
+                mains = mains.Where(x => x.skinname.ToLower().Contains(findSkins.Text.ToLower())).ToList();
             }
 
             if (sortItems.SelectedIndex != 0)
             {
-                mains = mains.Where(x => x.categorID.ToString() == sortItems.SelectedIndex.ToString()).ToList();
+                mains = mains.Where(x => x.rarityID.ToString() == sortItems.SelectedIndex.ToString()).ToList();
             }
 
             var mainAll = mains;
@@ -78,8 +78,8 @@ namespace DotaSHOP
                     user_id = userId,
                     skin_id = id.skin_id,
                 };
-                Entities8.GetContext().cart.Add(cart);
-                Entities8.GetContext().SaveChanges();
+                Entities9.GetContext().cart.Add(cart);
+                Entities9.GetContext().SaveChanges();
                 MessageBox.Show("Товар отправлен в корзину");
             }
             catch (Exception ex) { MessageBox.Show("Товар не отправлен в корзину"); }

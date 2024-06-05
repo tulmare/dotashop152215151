@@ -8,6 +8,6 @@ namespace DotaSHOP
 {
     public static class AppConnect
     {
-        public static Entities8 model0db;
+        public static Entities9 model0db;
     }
 }

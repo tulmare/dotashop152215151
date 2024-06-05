@@ -10,7 +10,7 @@ namespace DotaSHOP
         public card(int userid)
         {
             InitializeComponent();
-            items.entity = new Entities8();
+            items.entity = new Entities9();
             ListCard.ItemsSource = AppConnect.model0db.cart.ToList();
         }
         //Вернуться на главную
