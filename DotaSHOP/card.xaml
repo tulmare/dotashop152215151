@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DotaSHOP"
         mc:Ignorable="d"
-        Title="card" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="back" Content="Назад" HorizontalAlignment="Left" Margin="39,10,0,0" FontSize="20px" VerticalAlignment="Top" Width="83" Height="31" Click="back_Click"/>
-        <TextBlock x:Name="Prise" HorizontalAlignment="Left" Margin="39,378,0,0" TextWrapping="Wrap" Text="Цена: " FontSize="20px" VerticalAlignment="Top"/>
+        Title="card" Height="450" Width="1000" >
+    <Grid Background="#FF212121">
+        <Button x:Name="back" Content="Назад" HorizontalAlignment="Left" Margin="39,10,0,0" FontSize="20px" VerticalAlignment="Top" Width="83" Height="31" Click="back_Click" Background="#FF3A3A3A" Foreground="#FFFFFF"/>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="Prise" HorizontalAlignment="Left" Margin="39,378,0,0" TextWrapping="Wrap" Text="Цена: " FontSize="20px" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+            <TextBlock x:Name="Coast" HorizontalAlignment="Left" Margin="5,378,0,0" TextWrapping="Wrap" Text="0" FontSize="20px" VerticalAlignment="Top" Foreground="#FFFFFF"/>
+        </StackPanel>
 
-        <ListView x:Name="ListCard" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,60,0,66">
+        <ListView x:Name="ListCard" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,60,181,66" Background="#FF212121">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -21,38 +24,39 @@
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Width="140" Height="140" Source="{Binding main.CurrentPhoto}"/>
                         <StackPanel Grid.Column="1" Width="180" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Название: "/>
                                 <Run Text="{Binding skins.skinname}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Герой: "/>
                                 <Run Text="{Binding skins.hero}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Редкость: "/>
                                 <Run Text="{Binding skins.rarity}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Слот: "/>
                                 <Run Text="{Binding skins.slot}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Цена: "/>
                                 <Run Text="{Binding skins.price}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Описание: "/>
                                 <Run Text="{Binding skins.description}"/>
                             </TextBlock>
                         </StackPanel>
                         <ToolBarPanel Grid.Column="2"/>
-                        <Button x:Name="deleteItem" Grid.Column="2" Content="Удалить" FontSize="20px" HorizontalAlignment="Left" Margin="62,0,0,0" Tag="{Binding id}" VerticalAlignment="Center" Width="128" Height="34" Click="deleteItem_Click_1"/>
+                        <Button x:Name="deleteItem" Grid.Column="2" Content="Удалить" FontSize="20px" HorizontalAlignment="Left" Margin="62,0,0,0" Tag="{Binding id}" VerticalAlignment="Center" Width="128" Height="34" Click="deleteItem_Click_1" Background="#FF3A3A3A" Foreground="#FFFFFF"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button x:Name="buy" Content="Заказать" HorizontalAlignment="Left" Margin="642,375,0,0" FontSize="20px" VerticalAlignment="Top" Height="32" Width="107"/>
+        <Button x:Name="buy" Content="Заказать" HorizontalAlignment="Left" Margin="855,336,0,0" FontSize="20px" VerticalAlignment="Top" Height="32" Width="107" Background="#FF3A3A3A" Foreground="#FFFFFF" Click="buy_Click"/>
+        <Image x:Name="QRcode" HorizontalAlignment="Left" Height="100" Margin="855,104,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

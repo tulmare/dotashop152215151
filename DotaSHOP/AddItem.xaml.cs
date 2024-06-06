@@ -26,12 +26,35 @@ namespace DotaSHOP
                 rarityID.Items.Add(item.rarity.ToString());
             }
             rarityID.SelectedIndex = 0;
+
+            slotID.Items.Add("Фильтрация");
+            foreach (var item in AppConnect.model0db.slotcategory.ToList())
+            {
+                slotID.Items.Add(item.slot.ToString());
+            }
+            slotID.SelectedIndex = 0;
         }
         private skins editSkins;
 
         public AddItem(skins editSkins)
         {
+
             InitializeComponent();
+
+            rarityID.Items.Add("Фильтрация");
+            foreach (var item in AppConnect.model0db.rarcategory.ToList())
+            {
+                rarityID.Items.Add(item.rarity.ToString());
+            }
+            rarityID.SelectedIndex = 0;
+
+            slotID.Items.Add("Фильтрация");
+            foreach (var item in AppConnect.model0db.slotcategory.ToList())
+            {
+                slotID.Items.Add(item.slot.ToString());
+            }
+            slotID.SelectedIndex = 0;
+
             this.editSkins = editSkins;
 
             //получение данных из admin для изменение
@@ -49,8 +72,8 @@ namespace DotaSHOP
             price.Text = Convert.ToString(priceCh);
             hero.Text = heroCh;
             image_url.Text = imageurlCh;
-            rarityID.SelectedIndex = Convert.ToInt32(rarityIDCh) - 1;
-            slotID.SelectedIndex = Convert.ToInt32(slotIDCh) - 1;
+            rarityID.SelectedIndex = rarityIDCh;
+            slotID.SelectedIndex = slotIDCh;
             description.Text = descriptionCh;
         }
 
@@ -64,9 +87,9 @@ namespace DotaSHOP
             var PR = price.Text.ToString();
             var HR = hero.Text.ToString();
             var PHOTOITEM = image_url.Text.ToString();
-            var RAR = rarityID.SelectedIndex + 1;
-            var SL = slotID.SelectedIndex + 1;
-            var DS = description.Text.ToString(); 
+            var RAR = rarityID.SelectedIndex;
+            var SL = slotID.SelectedIndex;
+            var DS = description.Text.ToString();
 
 
             //проверка данных на корректность
@@ -100,12 +123,11 @@ namespace DotaSHOP
                 error++;
             }
 
-            //если нету ошибок то добавляем товар
             if (error == 0)
             {
                 try
                 {
-                    //проверка на изменение или добавлнеие
+                    //проверка на изменение или добавление
                     var skin_id = 0;
                     if (editSkins != null)
                     {
@@ -113,21 +135,20 @@ namespace DotaSHOP
                     }
                     skins mainItems = new skins()
                     {
-                        skin_id = skin_id,
                         skinname = skinname.Text,
                         price = Convert.ToInt32(price.Text),
                         hero = hero.Text,
                         image_url = image_url.Text,
                         rarityID = rarityID.SelectedIndex + 1,
-                        slotID = slotID.SelectedIndex + 1 
+                        slotID = slotID.SelectedIndex + 1, 
+                        description = description.Text
                     };
 
-                    //если данные уже есть тоесть мы изменяем, мы это ловим с помошью переменной и меняем данные
-                    AppConnect.model0db.skins.AddOrUpdate(mainItems);
-                    AppConnect.model0db.SaveChanges();
-                    MessageBox.Show("товар добавлен");
+                    //если данные уже есть тоесть мы изменяем, мы это ловим с помощью переменной и меняем данные
+                    Entities9.GetContext().skins.Add(mainItems);
+                    Entities9.GetContext().SaveChanges();
+                    MessageBox.Show("Товар добавлен");
 
-                    //переход на страницу с товаром
                     Adminka adminka = new Adminka();
                     adminka.Show();
                     Close();
@@ -136,14 +157,11 @@ namespace DotaSHOP
 
 
             }
-            //если есть ошибки то предупреждаем
             else
             {
                 MessageBox.Show("Обнаружены пустые данные");
             }
         }
-
-        //вернутся на страницу с товарами 
         private void back_Click(object sender, RoutedEventArgs e)
         {
             Adminka adminka = new Adminka();

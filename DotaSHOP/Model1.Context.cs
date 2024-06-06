@@ -20,6 +20,7 @@ namespace DotaSHOP
         {
         }
         public static Entities9 _context;
+
         public static Entities9 GetContext()
         {
             if (_context == null)

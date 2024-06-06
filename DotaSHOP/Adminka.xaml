@@ -11,7 +11,7 @@
         <TextBlock HorizontalAlignment="Left" FontSize="20px" Margin="43,31,0,0" Background="#FF212121" Foreground="#FFFFFF" TextWrapping="Wrap" Text="DOTASHOP" VerticalAlignment="Top" Height="27" Width="102"/>
         <ComboBox x:Name="sortItems" HorizontalAlignment="Left" Margin="551,34,0,0" VerticalAlignment="Top" Width="121" SelectionChanged="sortItems_SelectionChanged"/>
 
-        <Button x:Name="AddItem" Content="Добавить" HorizontalAlignment="Left" Margin="698,24,0,0" VerticalAlignment="Top" Height="41" Width="68" Click="AddItem_Click" Background="#FF3A3A3A" Foreground="#FFFFFF"/>
+        <Button x:Name="AddItem" Content="Добавить" HorizontalAlignment="Left" Margin="698,24,0,0" VerticalAlignment="Top" Height="41" Width="68" Click="AddItem_Click" Background="#FF3A3A3A" Foreground="#FFFFFF" FontSize="14"/>
 
 
         <Image Grid.Column="0" Source="{Binding CarrectImage}" Margin="0,86,0,0"/>
@@ -29,27 +29,27 @@
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Width="140" Height="140" Source="{Binding CurrentPhoto}"/>
                         <StackPanel Grid.Column="1" Width="auto" Orientation="Vertical" HorizontalAlignment="left">
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Название: "/>
                                 <Run Text="{Binding skinname}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Герой: "/>
                                 <Run Text="{Binding hero}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Редкость: "/>
                                 <Run Text="{Binding rarity}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Слот: "/>
                                 <Run Text="{Binding slot}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Цена: "/>
                                 <Run Text="{Binding price}"/>
                             </TextBlock>
-                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF">
+                            <TextBlock Width="auto" TextWrapping="Wrap" Height="auto" Foreground="#FFFFFF" Margin="5,0,0,0" FontSize="14">
                                 <Run Text="Описание: "/>
                                 <Run Text="{Binding description}"/>
                             </TextBlock>

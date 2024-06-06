@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.BarCode, Version=24.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.BarCode.24.5.0\lib\net47\Aspose.BarCode.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -212,6 +215,12 @@
     <Resource Include="img\skins\Dread_Retribution.jpeg" />
     <Resource Include="img\skins\Manifold_Paradox.png" />
     <Resource Include="img\skins\picture.jpg" />
+    <Resource Include="img\skins\Bladeform_Legacy.jpg" />
+    <Resource Include="img\skins\Demon_Eater.png" />
+    <Resource Include="img\skins\Feast_of_Abscession.jpg" />
+    <Resource Include="img\skins\Fiery_Soul_of_the_Slayer.png" />
+    <Resource Include="img\skins\Fractal_Horns_of_Inner_Abysm.png" />
+    <Resource Include="img\skins\Arms_of_Desolation.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

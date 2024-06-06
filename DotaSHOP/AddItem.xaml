@@ -14,10 +14,6 @@
         <ComboBox x:Name="rarityID" HorizontalAlignment="Left" FontSize="20px" Margin="513,115,0,0" VerticalAlignment="Top" Width="215" Height="32"/>
 
         <ComboBox x:Name="slotID" HorizontalAlignment="Left" FontSize="20px" Margin="513,200,0,0" VerticalAlignment="Top" Width="215" Height="32">
-            <ComboBoxItem Content="Оружие" />
-            <ComboBoxItem Content="Спина" />
-            <ComboBoxItem Content="Голова" />
-            <ComboBoxItem Content="Руки" />
         </ComboBox>
         <TextBox x:Name="description" HorizontalAlignment="Left" FontSize="20px" Margin="513,296,0,0" VerticalAlignment="Top" Width="215" Height="32"/>
 

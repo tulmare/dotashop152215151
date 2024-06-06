@@ -25,16 +25,17 @@ namespace DotaSHOP
         public string skinname { get; set; }
         public string hero { get; set; }
         public int slotID { get; set; }
-        public Nullable<decimal> price { get; set; }
+        public Nullable<int> price { get; set; }
         public string image_url { get; set; }
-        public string Image { get; set; }
+        
+        public string image { get; set; }
         public string CurrentPhoto
         {
             get
             {
                 if (String.IsNullOrEmpty(image_url) || String.IsNullOrWhiteSpace(image_url))
                 {
-                    return "img/skins/picture.jpg";
+                    return "/img/skins/picture.jpg";
                 }
                 else
                 {

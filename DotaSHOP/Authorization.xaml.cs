@@ -33,19 +33,22 @@ namespace DotaSHOP
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var userObj = AppConnect.model0db.users.FirstOrDefault(x => x.email == Email.Text && x.password == Password.Password);
-            if (userObj.roleID == 1)
-            {
-                App.Current.Properties["userEmail"] = userObj.user_id;
-                Adminka adminka = new Adminka();
-                adminka.Show();
-                Application.Current.MainWindow.Close();
-            }
-            else if (userObj.roleID == 2)
+            if (userObj != null)
             {
                 App.Current.Properties["userEmail"] = userObj.user_id;
                 Window1 window = new Window1((int)userObj.roleID);
-                window.Show();
-                Application.Current.MainWindow.Close();
+                if (userObj.roleID == 1) 
+                {
+                    App.Current.Properties["userEmail"] = userObj.user_id;
+                    Adminka adminka = new Adminka();
+                    adminka.Show();
+                    Application.Current.MainWindow.Close();
+                }
+                else
+                {
+                    window.Show();
+                    Application.Current.MainWindow.Close();
+                }
             }
             else
             {
